@@ -23,7 +23,10 @@ export interface UseAccordionResult {
 }
 
 function isLgOrWider(): boolean {
-  if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
+  if (
+    typeof window === "undefined" ||
+    typeof window.matchMedia !== "function"
+  ) {
     return false;
   }
   return window.matchMedia(LG_MEDIA_QUERY).matches;
@@ -63,12 +66,15 @@ export function useAccordion({
 
   const open = useCallback((id: string) => {
     userInteractedRef.current = true;
-    setOpenStepId((prev) => (prev === id ? prev : id));
+    setOpenStepId((prev: string) => (prev === id ? "" : id));
   }, []);
 
   // Track lg breakpoint at runtime.
   useEffect(() => {
-    if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
+    if (
+      typeof window === "undefined" ||
+      typeof window.matchMedia !== "function"
+    ) {
       return;
     }
     const mql = window.matchMedia(LG_MEDIA_QUERY);
@@ -82,7 +88,10 @@ export function useAccordion({
   // controls openStepId or when the user has already interacted.
   useEffect(() => {
     if (defaultOpenStepId !== undefined) return;
-    if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
+    if (
+      typeof window === "undefined" ||
+      typeof window.matchMedia !== "function"
+    ) {
       return;
     }
     const mql = window.matchMedia(LG_MEDIA_QUERY);
