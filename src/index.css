@@ -1,1 +1,30 @@
 @import "tailwindcss";
+
+/* Font face declarations live in the CSS bundle (not inline in HTML) so
+   the woff fetch is NOT in the critical network chain. `font-display: swap`
+   means text renders immediately in the system fallback and swaps to
+   Gilroy when the woff arrives. Only Bold + Medium are referenced
+   anywhere in the app (verified via grep on `Gilroy-`). */
+@font-face {
+  font-family: 'Gilroy-Medium';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Gilroy-Medium'),
+       url('https://fonts.cdnfonts.com/s/16219/Gilroy-Medium.woff') format('woff');
+}
+@font-face {
+  font-family: 'Gilroy-Bold';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Gilroy-Bold'),
+       url('https://fonts.cdnfonts.com/s/16219/Gilroy-Bold.woff') format('woff');
+}
+
+/* Restore Gilroy as the body font now that the CSS bundle has loaded.
+   Until this rule applies, the inline style in index.html keeps the
+   page in a system font so the FCP shell paints with no font deps. */
+body {
+  font-family: 'Gilroy-Medium', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+}

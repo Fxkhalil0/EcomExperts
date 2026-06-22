@@ -24,39 +24,22 @@
     imagesrcset="https://res.cloudinary.com/du1kw6s2g/image/upload/f_auto,q_auto:good,w_320,c_limit/v1781899570/7377c4c026acb3c476e41ccec1e0376490ee2cb9_o9rdf1.png 320w, https://res.cloudinary.com/du1kw6s2g/image/upload/f_auto,q_auto:good,w_480,c_limit/v1781899570/7377c4c026acb3c476e41ccec1e0376490ee2cb9_o9rdf1.png 480w, https://res.cloudinary.com/du1kw6s2g/image/upload/f_auto,q_auto:good,w_640,c_limit/v1781899570/7377c4c026acb3c476e41ccec1e0376490ee2cb9_o9rdf1.png 640w"
     imagesizes="(min-width: 1280px) 220px, (min-width: 1024px) 25vw, 100vw" />
 
-  <!-- Non-blocking font load. We define @font-face ourselves (inline below)
-       with `font-display: swap` so text renders immediately in the
-       fallback font and swaps to Gilroy when the woff arrives. This
-       eliminates the cdnfonts CSS round-trip and removes the
-       font-display FCP penalty Lighthouse flags. -->
+  <!-- Connection warm-up for cdnfonts. The actual @font-face declarations
+       live in the Tailwind CSS bundle (src/index.css) so the woff fetch
+       only starts AFTER our CSS arrives - keeping the font OFF the
+       critical chain that delays FCP/LCP. -->
   <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin />
   <link rel="dns-prefetch" href="https://fonts.cdnfonts.com" />
 
   <title>Bundle Builder | Build Your Home Security System</title>
   <style>
-    /* Self-hosted @font-face declarations (woff still served by cdnfonts).
-       `font-display: swap` is the key win: paint text in the system font
-       immediately, swap in Gilroy without blocking FCP/LCP.
-       Only Bold + Medium are referenced anywhere in the app. */
-    @font-face {
-      font-family: 'Gilroy-Medium';
-      font-style: normal;
-      font-weight: 400;
-      font-display: swap;
-      src: local('Gilroy-Medium'),
-           url('https://fonts.cdnfonts.com/s/16219/Gilroy-Medium.woff') format('woff');
-    }
-    @font-face {
-      font-family: 'Gilroy-Bold';
-      font-style: normal;
-      font-weight: 400;
-      font-display: swap;
-      src: local('Gilroy-Bold'),
-           url('https://fonts.cdnfonts.com/s/16219/Gilroy-Bold.woff') format('woff');
-    }
+    /* Minimal critical CSS painted before the JS/CSS bundle arrives.
+       Intentionally uses ONLY system fonts so the static FCP shell
+       paints with zero font dependencies. Gilroy swaps in later via
+       the main CSS bundle (font-display: swap, no visual jank). */
     body {
       margin: 0;
-      font-family: 'Gilroy-Medium', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
     }
     /* Static FCP shell — painted before CSS/JS finish downloading so
        Lighthouse records FCP/LCP on the HTML response itself, not after
