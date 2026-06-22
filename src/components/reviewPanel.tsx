@@ -72,24 +72,24 @@ export const ReviewPanel = memo(function ReviewPanel({
           </div>
           <div className="flex flex-col">
             {isEmpty ? (
-              <p className="text-sm text-gray-500">{emptyMessage}</p>
+              <p className="text-sm text-[#3F4856]">{emptyMessage}</p>
             ) : (
               visibleGroups.map((group) => (
                 <section
                   className="border-t border-[#CED6DE] mb-[10px] outline-none"
                   key={group.id}
                 >
-                  <h3 className="text-[#6B7480] text-[12px] leading-[100%] tracking-[0.36px] uppercase mt-[15px] mb-2 font-semibold">
+                  <h3 className="text-[#525964] text-[12px] leading-[100%] tracking-[0.36px] uppercase mt-[15px] mb-2 font-semibold">
                     {group.id}
                   </h3>
                   <ul className="flex flex-col gap-3">
                     {group.items.map((item) => (
                       <li key={item.id} className="flex items-center gap-3 outline-none border-none">
                         <img
-                          src={optimizeCloudinary(item.thumbnail, 96)}
+                          src={optimizeCloudinary(item.thumbnail, 144)}
                           alt=""
-                          width={48}
-                          height={48}
+                          width={144}
+                          height={144}
                           loading="lazy"
                           decoding="async"
                           className="h-12 w-12 flex-shrink-0 rounded-[5px] bg-white object-cover"
@@ -111,7 +111,7 @@ export const ReviewPanel = memo(function ReviewPanel({
                         <div className="ml-1 flex flex-col items-end gap-0 xl:flex-row xl:items-baseline xl:gap-[10px]">
                           {item.unitCompareAtPrice !== undefined &&
                             item.unitCompareAtPrice > item.unitPrice && (
-                              <span className="text-[14px] xl:text-base font-semibold xl:font-medium text-[#6F7882] line-through tabular-nums">
+                              <span className="text-[14px] xl:text-base font-semibold xl:font-medium text-[#52595F] line-through tabular-nums">
                                 {formatPrice(
                                   item.unitCompareAtPrice * item.quantity,
                                 )}
@@ -140,10 +140,10 @@ export const ReviewPanel = memo(function ReviewPanel({
           <div className="flex items-center justify-between xl:gap-[25px]">
             <figure className="w-[78px] h-[78px] xl:w-[131px] xl:h-[131px] flex-shrink-0">
               <img
-                src={optimizeCloudinary("https://res.cloudinary.com/du1kw6s2g/image/upload/v1781899569/Satisfaction_Badge-05_1_w37y5x.svg", 262)}
+                src={optimizeCloudinary("https://res.cloudinary.com/du1kw6s2g/image/upload/v1781899569/Satisfaction_Badge-05_1_w37y5x.svg", 400)}
                 alt=""
-                width={131}
-                height={131}
+                width={400}
+                height={400}
                 loading="lazy"
                 decoding="async"
                 className="w-full h-full object-contain"
@@ -162,7 +162,7 @@ export const ReviewPanel = memo(function ReviewPanel({
                 as low as $19.99/mo
               </div>
               <div className="flex items-baseline gap-2">
-                <span className="text-[#6F7882] text-[18px] leading-[100%] tracking-[0.6px] font-medium line-through tabular-nums">
+                <span className="text-[#52595F] text-[18px] leading-[100%] tracking-[0.6px] font-medium line-through tabular-nums">
                   {formatPrice(total + savings)}
                 </span>
                 <span className="text-[#4E2FD2] font-semibold leading-[114.286%] tracking-[0.6px] text-[24px] tabular-nums">
@@ -176,7 +176,7 @@ export const ReviewPanel = memo(function ReviewPanel({
               as low as $19.99/mo
             </div>
             <div className="flex items-baseline gap-2">
-              <span className="text-[#6F7882] text-[22px] leading-[100%] tracking-[0.6px] font-medium line-through tabular-nums">
+              <span className="text-[#52595F] text-[22px] leading-[100%] tracking-[0.6px] font-medium line-through tabular-nums">
                 {formatPrice(total + savings)}
               </span>
               <span className="text-[#4E2FD2] font-semibold leading-[114.286%] tracking-[0.6px] text-[28px] tabular-nums">
@@ -200,7 +200,7 @@ export const ReviewPanel = memo(function ReviewPanel({
               <button
                 type="button"
                 onClick={onSaveForLater}
-                className="cursor-pointer underline text-[#484848] font-italic text-[14px] tracking-[0.6px]"
+                className="cursor-pointer underline text-[#1F1F1F] italic text-[14px] tracking-[0.6px] mt-2 px-3 py-2 min-h-[24px]"
               >
                 {saveForLaterLabel}
               </button>
@@ -231,7 +231,7 @@ const SummaryRow = memo(function SummaryRow({ icon, label, value }: SummaryRowPr
         </p>
       </div>
       <div className="flex lg:flex-col xl:flex-row items-center gap-[10px] lg:gap-0 xl:gap-[10px]">
-        <span className="text-[#6F7882] text-right lg:text-[14px] xl:text-[16px] font-semibold line-through">
+        <span className="text-[#52595F] text-right lg:text-[14px] xl:text-[16px] font-semibold line-through">
           5.99$
         </span>
         {value && (

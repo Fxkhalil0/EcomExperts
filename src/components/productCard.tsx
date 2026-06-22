@@ -4,7 +4,7 @@ import { VariantSelector } from "@/components/variantSelector";
 import type { VariantOption } from "@/components/variantSelector";
 import { QuantityStepper } from "@/components/quantityStepper";
 import { cn } from "@/utils/cn";
-import { optimizeCloudinary } from "@/utils/cloudinary";
+import { cloudinarySrcSet, optimizeCloudinary } from "@/utils/cloudinary";
 import { formatCurrency } from "@/utils/format";
 import type { MinorUnits } from "@/types";
 
@@ -96,16 +96,28 @@ export const ProductCard = memo(function ProductCard({
           </span>
         )}
         <div className="w-full rounded-[5px] bg-gray-50 aspect-[107/62]">
-          <img
-            src={optimizeCloudinary(image, 400)}
-            alt={imageAlt ?? title}
-            width={400}
-            height={232}
-            loading={priority ? "eager" : "lazy"}
-            decoding="async"
-            fetchPriority={priority ? "high" : "low"}
-            className="h-full lg:h-auto xl:h-full w-full object-contain"
-          />
+          {(() => {
+            const srcSet = cloudinarySrcSet(image, [320, 480, 640, 960]);
+            return (
+              <img
+                src={optimizeCloudinary(image, 600)}
+                {...(srcSet
+                  ? {
+                      srcSet,
+                      sizes:
+                        "(min-width: 1280px) 220px, (min-width: 1024px) 25vw, 100vw",
+                    }
+                  : null)}
+                alt={imageAlt ?? title}
+                width={640}
+                height={371}
+                loading={priority ? "eager" : "lazy"}
+                decoding="async"
+                fetchPriority={priority ? "high" : "low"}
+                className="h-full lg:h-auto xl:h-full w-full object-contain"
+              />
+            );
+          })()}
         </div>
       </div>
       <div className="flex w-full flex-1 flex-col gap-3 self-stretch">

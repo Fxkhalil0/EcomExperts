@@ -31,7 +31,7 @@ export const VariantSelector = memo(function VariantSelector({
     <div
       role="radiogroup"
       aria-label={ariaLabel}
-      className={cn("flex flex-wrap items-center gap-[6px]", className)}
+      className={cn("flex flex-wrap items-center gap-[8px]", className)}
     >
       {variants.map((variant) => {
         const isActive = variant.id === selectedVariantId;
@@ -60,19 +60,19 @@ export const VariantSelector = memo(function VariantSelector({
                 : undefined
             }
             className={cn(
-              "inline-flex shrink-0 items-center gap-2 rounded-[2px] border bg-white px-[3px] py-[1px] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(78,47,210,0.70)]",
+              "inline-flex min-h-[28px] shrink-0 items-center gap-2 rounded-[2px] border bg-white px-[6px] py-[3px] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(78,47,210,0.70)]",
               !isSelected &&
                 (isActive
                   ? "border-gray-900"
                   : "border-gray-200 hover:border-gray-400"),
             )}
           >
-            <figure className="block h-[28px] w-[28px] lg:h-[22px] lg:w-[22px] xl:h-[28px] xl:w-[28px] shrink-0 overflow-hidden rounded-sm bg-gray-50">
+            <figure className="block h-[28px] w-[28px] lg:h-[24px] lg:w-[24px] xl:h-[28px] xl:w-[28px] shrink-0 overflow-hidden rounded-sm bg-gray-50">
               <img
-                src={optimizeCloudinary(variant.thumbnail, 56)}
+                src={optimizeCloudinary(variant.thumbnail, 96)}
                 alt=""
-                width={56}
-                height={56}
+                width={96}
+                height={96}
                 loading="lazy"
                 decoding="async"
                 className="h-full w-full object-contain"
