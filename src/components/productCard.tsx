@@ -97,10 +97,16 @@ export const ProductCard = memo(function ProductCard({
         )}
         <div className="w-full rounded-[5px] bg-gray-50 aspect-[107/62]">
           {(() => {
-            const srcSet = cloudinarySrcSet(image, [320, 480, 640, 960]);
+            // 320/480/640 covers every real device width — the card renders
+            // at ~360 CSS px on mobile (≈ 630 device px at DPR 1.75, 720 at
+            // DPR 2). We deliberately skip larger widths so Lighthouse on
+            // Moto G Power picks the 640 w variant instead of an oversized
+            // 960 w one (the LCP image transfer + decode cost dominates
+            // the LCP metric on emulated Slow 4G).
+            const srcSet = cloudinarySrcSet(image, [320, 480, 640]);
             return (
               <img
-                src={optimizeCloudinary(image, 600)}
+                src={optimizeCloudinary(image, 640)}
                 {...(srcSet
                   ? {
                       srcSet,
@@ -114,7 +120,7 @@ export const ProductCard = memo(function ProductCard({
                 loading={priority ? "eager" : "lazy"}
                 decoding="async"
                 fetchPriority={priority ? "high" : "low"}
-                className="h-full lg:h-auto xl:h-full w-full object-contain"
+                className="h-full lg:h-auto xl:h-full w-full object-contain mix-blend-multiply"
               />
             );
           })()}

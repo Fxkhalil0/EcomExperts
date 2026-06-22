@@ -15,10 +15,13 @@
 
   <!-- Preload the first (LCP-candidate) product image so its bytes land in
        parallel with the JS bundle instead of being requested only after
-       React mounts. Uses responsive srcset matching ProductCard sizes. -->
+       React mounts. The `imagesrcset` / `imagesizes` MUST match
+       ProductCard's <img> srcset/sizes so the preload is consumed
+       (otherwise the browser fetches a different variant and the
+       preloaded bytes are wasted). -->
   <link rel="preload" as="image" fetchpriority="high"
-    href="https://res.cloudinary.com/du1kw6s2g/image/upload/f_auto,q_auto:good,w_600,c_limit/v1781899570/7377c4c026acb3c476e41ccec1e0376490ee2cb9_o9rdf1.png"
-    imagesrcset="https://res.cloudinary.com/du1kw6s2g/image/upload/f_auto,q_auto:good,w_320,c_limit/v1781899570/7377c4c026acb3c476e41ccec1e0376490ee2cb9_o9rdf1.png 320w, https://res.cloudinary.com/du1kw6s2g/image/upload/f_auto,q_auto:good,w_480,c_limit/v1781899570/7377c4c026acb3c476e41ccec1e0376490ee2cb9_o9rdf1.png 480w, https://res.cloudinary.com/du1kw6s2g/image/upload/f_auto,q_auto:good,w_640,c_limit/v1781899570/7377c4c026acb3c476e41ccec1e0376490ee2cb9_o9rdf1.png 640w, https://res.cloudinary.com/du1kw6s2g/image/upload/f_auto,q_auto:good,w_960,c_limit/v1781899570/7377c4c026acb3c476e41ccec1e0376490ee2cb9_o9rdf1.png 960w"
+    href="https://res.cloudinary.com/du1kw6s2g/image/upload/f_auto,q_auto:good,w_640,c_limit/v1781899570/7377c4c026acb3c476e41ccec1e0376490ee2cb9_o9rdf1.png"
+    imagesrcset="https://res.cloudinary.com/du1kw6s2g/image/upload/f_auto,q_auto:good,w_320,c_limit/v1781899570/7377c4c026acb3c476e41ccec1e0376490ee2cb9_o9rdf1.png 320w, https://res.cloudinary.com/du1kw6s2g/image/upload/f_auto,q_auto:good,w_480,c_limit/v1781899570/7377c4c026acb3c476e41ccec1e0376490ee2cb9_o9rdf1.png 480w, https://res.cloudinary.com/du1kw6s2g/image/upload/f_auto,q_auto:good,w_640,c_limit/v1781899570/7377c4c026acb3c476e41ccec1e0376490ee2cb9_o9rdf1.png 640w"
     imagesizes="(min-width: 1280px) 220px, (min-width: 1024px) 25vw, 100vw" />
 
   <!-- Non-blocking font load: fetch async, swap in once ready -->
