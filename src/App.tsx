@@ -83,6 +83,9 @@ function App() {
   return (
     <div className="min-h-screen">
       <div className="w-full pt-[31px] lg:px-[66px] lg:pt-[49.36px] lg:pb-[49.64px] xl:pl-[105px] xl:pr-[122px] xl:pt-[49.32px] xl:pb-[62px]">
+        <h1 className="block lg:hidden m-0 p-0 text-[#1F1F1F] text-center text-[31.875px] font-bold leading-[110%] tracking-[-0.064px]">
+          Let’s get started!
+        </h1>
         <div className="block lg:grid lg:grid-cols-[minmax(0,2fr)_380px] lg:items-start lg:gap-[29px] xl:block">
           <Accordion steps={steps} />
           <div className="block mt-[15px] lg:sticky xl:block lg:mt-[15px] xl:mt-[33.58px] pt-[15px] bg-[#EDF4FF] rounded-[10px]">
