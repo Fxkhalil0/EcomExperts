@@ -1,8 +1,7 @@
-import { useCallback, useMemo, useState } from "react";
+import { lazy, Suspense, useCallback, useMemo, useState } from "react";
 import { Accordion } from "@/components/accordion";
 import type { AccordionStep } from "@/components/accordion";
 import { CategoryProducts } from "@/components/categoryProducts";
-import { Purchase } from "@/components/purchase";
 import { ReviewPanel } from "@/components/reviewPanel";
 import { useBundle } from "@/hooks/useBundle";
 import { useReviewPanel } from "@/hooks/useReviewPanel";
@@ -11,7 +10,14 @@ import { categoryIcons } from "@/data/categoryIcons";
 import { buildCatalogIndex } from "@/helpers/catalog";
 import type { Category, ReviewPanelItem } from "@/types";
 
+// Lazy-load the Purchase view so its code (and the JSON it renders) is
+// only fetched when the user actually hits "Checkout". Cuts initial JS.
+const Purchase = lazy(() =>
+  import("@/components/purchase").then((m) => ({ default: m.Purchase })),
+);
+
 type View = "builder" | "purchase";
+
 
 // Module-scope derivations: built once at import time so each render reuses
 // the same references and any memo deps that include them stay stable.
@@ -72,18 +78,20 @@ function App() {
 
   if (view === "purchase") {
     return (
-      <Purchase
-        selections={selections}
-        total={total}
-        onBack={handleBackToBuilder}
-      />
+      <Suspense fallback={<div className="p-8 text-sm text-[#4F4F4F]">Loading…</div>}>
+        <Purchase
+          selections={selections}
+          total={total}
+          onBack={handleBackToBuilder}
+        />
+      </Suspense>
     );
   }
 
   return (
-    <div className="min-h-screen">
+    <main className="min-h-screen">
       <div className="w-full pt-[31px] lg:px-[66px] lg:pt-[49.36px] lg:pb-[49.64px] xl:pl-[105px] xl:pr-[122px] xl:pt-[49.32px] xl:pb-[62px]">
-        <h1 className="block lg:hidden m-0 p-0 text-[#1F1F1F] text-center text-[31.875px] font-bold leading-[110%] tracking-[-0.064px]">
+        <h1 className="m-0 p-0 text-[#1F1F1F] text-center text-[31.875px] font-bold leading-[110%] tracking-[-0.064px] lg:sr-only">
           Let’s get started!
         </h1>
         <div className="block lg:grid lg:grid-cols-[minmax(0,2fr)_380px] lg:items-start lg:gap-[29px] xl:block">
@@ -101,7 +109,7 @@ function App() {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 

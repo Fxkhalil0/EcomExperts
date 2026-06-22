@@ -1,0 +1,23 @@
+# Bundle Builder
+
+> An interactive bundle builder for a home security system. Customers can
+> pick cameras, plans, sensors, and accessories, configure quantities and
+> variants, and review the bundle total before checkout.
+
+## What this site does
+
+- Lets visitors assemble a custom home-security bundle from four categories:
+  cameras, plans, sensors, and accessories.
+- Persists the in-progress bundle in `localStorage` so it survives reloads.
+- Computes discounted pricing and bundle savings client-side.
+- Hands the assembled bundle to a checkout step that prints the payload
+  that would be sent to a checkout API.
+
+## Pages
+
+- [/](https://ecom-experts-chi.vercel.app/): Single-page bundle builder.
+
+## Notes
+
+- This is a single-page React application; all interaction happens on `/`.
+- The site is purely client-side; there is no public API to query.

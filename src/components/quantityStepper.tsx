@@ -31,7 +31,7 @@ export const QuantityStepper = memo(function QuantityStepper({
   const increaseDisabled = disabled || (max !== undefined && quantity >= max);
 
   const buttonBase =
-    "flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-[4px] text-sm leading-none text-gray-700 transition-colors disabled:cursor-not-allowed disabled:opacity-40";
+    "flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-[4px] text-sm leading-none text-gray-700 transition-colors disabled:cursor-not-allowed disabled:opacity-40";
   return (
     <div
       className={cn(

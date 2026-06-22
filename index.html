@@ -5,12 +5,26 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
-  <title>bundle-builder</title>
+  <meta name="theme-color" content="#4E2FD2" />
+  <meta name="description"
+    content="Build your custom home security bundle with cameras, sensors, plans, and accessories. Save more when you bundle." />
+
+  <!-- Preconnect to image CDN so product image fetches start sooner -->
+  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
+  <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+
+  <!-- Non-blocking font load: fetch async, swap in once ready -->
+  <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.cdnfonts.com/css/gilroy-bold"
+    onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/gilroy-bold" />
+  </noscript>
+
+  <title>Bundle Builder | Build Your Home Security System</title>
   <style>
-    @import url('https://fonts.cdnfonts.com/css/gilroy-bold');
     body {
-      font-family: 'Gilroy-Medium', sans-serif;
+      font-family: 'Gilroy-Medium', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     }
   </style>
 

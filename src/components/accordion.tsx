@@ -64,9 +64,9 @@ export const Accordion = memo(function Accordion({
                 >
                   <div className="flex flex-1 items-center gap-2">
                     <span>{step.icon}</span>
-                    <h1 className="text-[#0B0D10] font-[Gilroy-Bold] lg:text-[22px] xl:text-[28px] leading-[100%]">
+                    <h2 className="text-[#0B0D10] font-[Gilroy-Bold] lg:text-[22px] xl:text-[28px] leading-[100%]">
                       {step.title}
-                    </h1>
+                    </h2>
                   </div>
                   <div className="flex items-center gap-1">
                     {(isOpen || !matchesLg) && (

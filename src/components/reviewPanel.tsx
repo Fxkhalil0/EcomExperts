@@ -2,6 +2,7 @@ import { memo, useMemo } from "react";
 import type { ReactNode } from "react";
 import { QuantityStepper } from "@/components/quantityStepper";
 import { cn } from "@/utils/cn";
+import { optimizeCloudinary } from "@/utils/cloudinary";
 import { formatCurrency } from "@/utils/format";
 import type { MinorUnits, ReviewPanelGroup, ReviewPanelItem } from "@/types";
 import { DeliveryIcon } from "@/icons";
@@ -59,9 +60,9 @@ export const ReviewPanel = memo(function ReviewPanel({
       <div className="p-[20px_20px_31px_20px] grid lg:grid-cols-1 xl:grid-cols-3 gap-[52px]">
         <div className="lg:col-span-1 xl:col-span-2">
           <div className="flex flex-col gap-[5px] mb-[10px]">
-            <h3 className="text-[#1F1F1F] lg:text-[22px] xl:text-[28px] font-semibold leading-[100%] tracking-[0.6px]">
+            <h2 className="text-[#1F1F1F] lg:text-[22px] xl:text-[28px] font-semibold leading-[100%] tracking-[0.6px]">
               Your security system
-            </h3>
+            </h2>
             <p className="text-[#4F4F4F] lg:text-[14px] xl:text-[16px] font-medium leading-[130%] tracking-[0.6px]">
               Customize your security system by selecting the components that
               best
@@ -78,16 +79,19 @@ export const ReviewPanel = memo(function ReviewPanel({
                   className="border-t border-[#CED6DE] mb-[10px] outline-none"
                   key={group.id}
                 >
-                  <h3 className="text-[#A8B2BD] text-[12px] leading-[100%] tracking-[0.36px] uppercase mt-[15px] mb-2">
+                  <h3 className="text-[#6B7480] text-[12px] leading-[100%] tracking-[0.36px] uppercase mt-[15px] mb-2 font-semibold">
                     {group.id}
                   </h3>
                   <ul className="flex flex-col gap-3">
                     {group.items.map((item) => (
                       <li key={item.id} className="flex items-center gap-3 outline-none border-none">
                         <img
-                          src={item.thumbnail}
+                          src={optimizeCloudinary(item.thumbnail, 96)}
                           alt=""
+                          width={48}
+                          height={48}
                           loading="lazy"
+                          decoding="async"
                           className="h-12 w-12 flex-shrink-0 rounded-[5px] bg-white object-cover"
                         />
                         <div className="min-w-0 flex-1">
@@ -136,8 +140,12 @@ export const ReviewPanel = memo(function ReviewPanel({
           <div className="flex items-center justify-between xl:gap-[25px]">
             <figure className="w-[78px] h-[78px] xl:w-[131px] xl:h-[131px] flex-shrink-0">
               <img
-                src="https://res.cloudinary.com/du1kw6s2g/image/upload/v1781899569/Satisfaction_Badge-05_1_w37y5x.svg"
+                src={optimizeCloudinary("https://res.cloudinary.com/du1kw6s2g/image/upload/v1781899569/Satisfaction_Badge-05_1_w37y5x.svg", 262)}
                 alt=""
+                width={131}
+                height={131}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-contain"
               />
             </figure>
@@ -177,7 +185,7 @@ export const ReviewPanel = memo(function ReviewPanel({
             </div>
           </div>
           <div className="flex flex-col items-center">
-            <small className="text-[#0AA288] text-center font-semibold lg:font-normal xl:font-semibold text-[14px] lg:text-xs xl:text-[14px] tracking-[0.6px]">
+            <small className="text-[#067458] text-center font-semibold lg:font-normal xl:font-semibold text-[14px] lg:text-xs xl:text-[14px] tracking-[0.6px]">
               Congrats! You’re saving $50.92 on your security bundle!
             </small>
             <button

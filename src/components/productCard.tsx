@@ -4,6 +4,7 @@ import { VariantSelector } from "@/components/variantSelector";
 import type { VariantOption } from "@/components/variantSelector";
 import { QuantityStepper } from "@/components/quantityStepper";
 import { cn } from "@/utils/cn";
+import { optimizeCloudinary } from "@/utils/cloudinary";
 import { formatCurrency } from "@/utils/format";
 import type { MinorUnits } from "@/types";
 
@@ -39,6 +40,8 @@ export interface ProductCardProps {
   formatPrice?: (amountInMinorUnits: MinorUnits) => string;
   className?: string;
   footer?: ReactNode;
+  /** When true, the image is loaded eagerly with high fetch priority (use for LCP). */
+  priority?: boolean;
 }
 
 export const ProductCard = memo(function ProductCard({
@@ -64,6 +67,7 @@ export const ProductCard = memo(function ProductCard({
   formatPrice = formatCurrency,
   className,
   footer,
+  priority = false,
 }: ProductCardProps) {
   const isSelected = selected ?? quantity > 0;
   const hasVariants = variants !== undefined && variants.length > 0;
@@ -93,19 +97,22 @@ export const ProductCard = memo(function ProductCard({
         )}
         <div className="w-full rounded-[5px] bg-gray-50 aspect-[107/62]">
           <img
-            src={image}
+            src={optimizeCloudinary(image, 400)}
             alt={imageAlt ?? title}
-            loading="lazy"
+            width={400}
+            height={232}
+            loading={priority ? "eager" : "lazy"}
             decoding="async"
+            fetchPriority={priority ? "high" : "low"}
             className="h-full lg:h-auto xl:h-full w-full object-contain"
           />
         </div>
       </div>
       <div className="flex w-full flex-1 flex-col gap-3 self-stretch">
         <div className="flex flex-col gap-2">
-          <h1 className="text-[#1F1F1F] lg:text-[16px] xl:text-[18px] leading-[100%] font-semibold">
+          <h3 className="text-[#1F1F1F] lg:text-[16px] xl:text-[18px] leading-[100%] font-semibold">
             {title}
-          </h1>
+          </h3>
           {description && (
             <p className="text-[rgb(31_31_31_/_75%)] lg:text-[12px] xl:text-[14px] leading-[130%] tracking-[0.6px]">
               {description}{" "}

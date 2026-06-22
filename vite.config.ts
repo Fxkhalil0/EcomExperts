@@ -11,6 +11,28 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  build: {
+    target: 'es2020',
+    cssCodeSplit: true,
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        // Split React framework into its own long-cacheable chunk so app
+        // code can update without invalidating the vendor bundle.
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (
+              id.includes('/react/') ||
+              id.includes('/react-dom/') ||
+              id.includes('/scheduler/')
+            ) {
+              return 'react'
+            }
+          }
+        },
+      },
+    },
+  },
   test: {
     environment: 'jsdom',
     globals: false,

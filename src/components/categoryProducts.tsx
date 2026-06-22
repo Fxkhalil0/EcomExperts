@@ -25,7 +25,7 @@ export const CategoryProducts = memo(function CategoryProducts({
 
   return (
     <div className="grid grid-cols-1 gap-[15px] lg:grid-cols-2 lg:items-center xl:grid-cols-5">
-      {products.map((product) => (
+      {products.map((product, index) => (
         <CategoryProductCard
           key={product.id}
           product={product}
@@ -34,6 +34,7 @@ export const CategoryProducts = memo(function CategoryProducts({
           incrementQuantity={incrementQuantity}
           decrementQuantity={decrementQuantity}
           changeVariant={changeVariant}
+          priority={index === 0}
         />
       ))}
     </div>
@@ -47,6 +48,7 @@ interface CategoryProductCardProps {
   incrementQuantity: (productId: number, variantId?: number) => void;
   decrementQuantity: (productId: number, variantId?: number) => void;
   changeVariant: (productId: number, variantId: number) => void;
+  priority?: boolean;
 }
 
 function CategoryProductCard({
@@ -56,6 +58,7 @@ function CategoryProductCard({
   incrementQuantity,
   decrementQuantity,
   changeVariant,
+  priority = false,
 }: CategoryProductCardProps) {
   const hasVariants =
     product.variants !== undefined && product.variants.length > 0;
@@ -123,6 +126,7 @@ function CategoryProductCard({
       price={currentPrice}
       compareAtPrice={compareAtPrice}
       selected={totalQuantity > 0}
+      priority={priority}
     />
   );
 }

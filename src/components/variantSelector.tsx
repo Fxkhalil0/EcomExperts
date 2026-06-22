@@ -1,5 +1,6 @@
 import { memo } from "react";
 import { cn } from "@/utils/cn";
+import { optimizeCloudinary } from "@/utils/cloudinary";
 
 export interface VariantOption {
   id: number;
@@ -68,9 +69,12 @@ export const VariantSelector = memo(function VariantSelector({
           >
             <figure className="block h-[28px] w-[28px] lg:h-[22px] lg:w-[22px] xl:h-[28px] xl:w-[28px] shrink-0 overflow-hidden rounded-sm bg-gray-50">
               <img
-                src={variant.thumbnail}
+                src={optimizeCloudinary(variant.thumbnail, 56)}
                 alt=""
+                width={56}
+                height={56}
                 loading="lazy"
+                decoding="async"
                 className="h-full w-full object-contain"
               />
             </figure>
