@@ -9,8 +9,12 @@
   <meta name="description"
     content="Build your custom home security bundle with cameras, sensors, plans, and accessories. Save more when you bundle." />
 
-  <!-- Preconnect to image CDN so product image fetches start sooner -->
-  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
+  <!-- Preconnect to image CDN so product image fetches start sooner.
+       No `crossorigin` here: <img> tags fetch without CORS, and a
+       preconnect with crossorigin only matches CORS connections,
+       so leaving it off lets the actual image requests reuse the
+       warmed-up connection. -->
+  <link rel="preconnect" href="https://res.cloudinary.com" />
   <link rel="dns-prefetch" href="https://res.cloudinary.com" />
 
   <!-- Preload the first (LCP-candidate) product image so its bytes land in
@@ -24,12 +28,11 @@
     imagesrcset="https://res.cloudinary.com/du1kw6s2g/image/upload/f_auto,q_auto:good,w_320,c_limit/v1781899570/7377c4c026acb3c476e41ccec1e0376490ee2cb9_o9rdf1.png 320w, https://res.cloudinary.com/du1kw6s2g/image/upload/f_auto,q_auto:good,w_480,c_limit/v1781899570/7377c4c026acb3c476e41ccec1e0376490ee2cb9_o9rdf1.png 480w, https://res.cloudinary.com/du1kw6s2g/image/upload/f_auto,q_auto:good,w_640,c_limit/v1781899570/7377c4c026acb3c476e41ccec1e0376490ee2cb9_o9rdf1.png 640w"
     imagesizes="(min-width: 1280px) 220px, (min-width: 1024px) 25vw, 100vw" />
 
-  <!-- Connection warm-up for cdnfonts. The actual @font-face declarations
-       live in the Tailwind CSS bundle (src/index.css) so the woff fetch
+  <!-- Fonts are self-hosted under /fonts/ - no third-party origin needed,
+       so no preconnect for cdnfonts. The @font-face declarations live
+       in the Tailwind CSS bundle (src/index.css) so the woff fetch
        only starts AFTER our CSS arrives - keeping the font OFF the
        critical chain that delays FCP/LCP. -->
-  <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin />
-  <link rel="dns-prefetch" href="https://fonts.cdnfonts.com" />
 
   <title>Bundle Builder | Build Your Home Security System</title>
   <style>

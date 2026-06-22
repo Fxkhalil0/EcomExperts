@@ -4,14 +4,17 @@
    the woff fetch is NOT in the critical network chain. `font-display: swap`
    means text renders immediately in the system fallback and swaps to
    Gilroy when the woff arrives. Only Bold + Medium are referenced
-   anywhere in the app (verified via grep on `Gilroy-`). */
+   anywhere in the app (verified via grep on `Gilroy-`).
+   Fonts are SELF-HOSTED under /fonts/ so they're same-origin, cached
+   with `immutable` (see vercel.json), and don't require a separate
+   cross-origin TLS handshake. */
 @font-face {
   font-family: 'Gilroy-Medium';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
   src: local('Gilroy-Medium'),
-       url('https://fonts.cdnfonts.com/s/16219/Gilroy-Medium.woff') format('woff');
+       url('/fonts/Gilroy-Medium.woff') format('woff');
 }
 @font-face {
   font-family: 'Gilroy-Bold';
@@ -19,7 +22,7 @@
   font-weight: 400;
   font-display: swap;
   src: local('Gilroy-Bold'),
-       url('https://fonts.cdnfonts.com/s/16219/Gilroy-Bold.woff') format('woff');
+       url('/fonts/Gilroy-Bold.woff') format('woff');
 }
 
 /* Restore Gilroy as the body font now that the CSS bundle has loaded.
