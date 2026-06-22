@@ -1,0 +1,30 @@
+import type { SVGProps } from "react";
+
+interface ChevronIconProps extends SVGProps<SVGSVGElement> {
+  width?: number;
+  height?: number;
+  fill?: string;
+}
+
+export const ChevronIcon = ({
+  width = 12,
+  height = 12,
+  fill = "#4E2FD2",
+  ...props
+}: ChevronIconProps) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={width}
+      height={height}
+      viewBox="0 0 12 12"
+      fill="none"
+      {...props}
+    >
+      <path
+        d="M5.59318 2.56961C5.79259 2.29044 6.2075 2.29044 6.40691 2.56962L10.4353 8.20938C10.6717 8.54032 10.4351 9 10.0284 9H1.9716C1.56491 9 1.32835 8.54031 1.56473 8.20938L5.59318 2.56961Z"
+        fill={fill}
+      />
+    </svg>
+  );
+};
